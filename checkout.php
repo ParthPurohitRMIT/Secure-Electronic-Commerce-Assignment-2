@@ -46,12 +46,10 @@ foreach ($_SESSION['cart'] as $item) {
                 </div>
 
                 <h3>Payment method</h3>
-                <p>Stripe and PayWay work. PayPal and Google Pay are for Parth (search Parth).</p>
 
                 <div class="payment-option"><label><input type="radio" name="payment_method" value="stripe" checked> Stripe (working)</label></div>
                 <div class="payment-option"><label><input type="radio" name="payment_method" value="payway"> Westpac PayWay (working)</label></div>
-                <!-- Parth: PayPal - copy the Buy Now form from tutorial5-paypal/index.php -->
-                <div class="payment-option"><label><input type="radio" name="payment_method" value="paypal"> PayPal (todo)</label></div>
+                <div class="payment-option"><label><input type="radio" name="payment_method" value="paypal"> PayPal (working)</label></div>
                 <!-- Parth: Google Pay - copy tutorial6-gpay/index.js into gpay.js -->
                 <div class="payment-option"><label><input type="radio" name="payment_method" value="gpay"> Google Pay (todo)</label></div>
 
@@ -96,12 +94,9 @@ function goPay() {
         form.action = "payway.php";
         return true;
     }
-
-    // Parth PayPal: set form.action = "https://www.sandbox.paypal.com/cgi-bin/webscr"
-    // and add hidden fields: cmd=_xclick, business, item_name, amount, currency_code, return, notify_url
     if (method == "paypal") {
-        alert("PayPal not done yet. See tutorial5-paypal.");
-        return false;
+        form.action = "paypal.php";
+        return true;
     }
 
     // Parth Google Pay: call onGooglePaymentButtonClicked() from tutorial6-gpay

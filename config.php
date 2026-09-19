@@ -17,9 +17,17 @@ define('PAYWAY_USERNAME', 'YOUR_PAYWAY_USERNAME');
 define('PAYWAY_PASSWORD', '');
 define('PAYWAY_MERCHANT_ID', 'TEST');
 
-// Parth: PayPal - fill these in from tutorial5-paypal/config.php
-define('PAYPAL_ID', 'PlaceYourSellerEmail');
-define('PAYPAL_URL', 'https://www.sandbox.paypal.com/cgi-bin/webscr');
+// PayPal sandbox - put the seller email in PAYPAL_ID
+// same settings as tutorial5-paypal/config.php
+define('PAYPAL_ID', 'sb-07ts052975488@business.example.com');
+define('PAYPAL_SANDBOX', true);
+define('PAYPAL_RETURN_URL', SITE_URL . '/success.php?gateway=paypal');
+define('PAYPAL_CANCEL_URL', SITE_URL . '/success.php?cancel=1');
+define('PAYPAL_NOTIFY_URL', SITE_URL . '/ipn.php');
+define('PAYPAL_CURRENCY', 'AUD');
+define('PAYPAL_URL', (PAYPAL_SANDBOX == true)
+    ? 'https://www.sandbox.paypal.com/cgi-bin/webscr'
+    : 'https://www.paypal.com/cgi-bin/webscr');
 
 $products = array(
     1 => array('id' => 1, 'name' => 'Bronton', 'price' => 3000, 'image' => 'assets/img/bronton.jpg'),
