@@ -36,19 +36,82 @@ foreach ($_SESSION['cart'] as $item) {
     <div class="row">
         <div class="col-md-6">
             <form id="checkoutForm" method="post" action="stripe.php" onsubmit="return goPay();">
+                <h3>Billing address</h3>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>First name</label>
+                            <input type="text" class="form-control" name="first_name" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Last name</label>
+                            <input type="text" class="form-control" name="last_name" required>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" class="form-control" name="name" required>
+                    <label>Username</label>
+                    <input type="text" class="form-control" name="username" value="alice">
                 </div>
                 <div class="form-group">
                     <label>Email</label>
                     <input type="email" class="form-control" name="email" required>
                 </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" class="form-control" name="address" value="1234 Main St">
+                </div>
+                <div class="form-group">
+                    <label>Address 2 (optional)</label>
+                    <input type="text" class="form-control" name="address2" value="Apartment 1">
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>Country</label>
+                            <select class="form-control" name="country">
+                                <option value="AU" selected>Australia</option>
+                                <option value="NZ">New Zealand</option>
+                                <option value="GB">United Kingdom</option>
+                                <option value="US">United States</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>State</label>
+                            <select class="form-control" name="state">
+                                <option value="NSW" selected>NSW</option>
+                                <option value="VIC">VIC</option>
+                                <option value="QLD">QLD</option>
+                                <option value="SA">SA</option>
+                                <option value="WA">WA</option>
+                                <option value="TAS">TAS</option>
+                                <option value="NT">NT</option>
+                                <option value="ACT">ACT</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>Zip</label>
+                            <input type="text" class="form-control" name="zip" value="2000">
+                        </div>
+                    </div>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" name="shipping_same" value="1" checked> Shipping address is the same as my billing address</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" name="save_info" value="1" checked> Save this information for next time</label>
+                </div>
 
                 <h3>Payment method</h3>
 
                 <div class="payment-option"><label><input type="radio" name="payment_method" value="stripe" checked> Stripe (working)</label></div>
-                <div class="payment-option"><label><input type="radio" name="payment_method" value="payway"> Westpac PayWay (working)</label></div>
+                <div class="payment-option"><label><input type="radio" name="payment_method" value="square"> Square (sandbox)</label></div>
                 <div class="payment-option"><label><input type="radio" name="payment_method" value="paypal"> PayPal (working)</label></div>
                 <!-- Parth: Google Pay - copy tutorial6-gpay/index.js into gpay.js -->
                 <div class="payment-option"><label><input type="radio" name="payment_method" value="gpay"> Google Pay (todo)</label></div>
@@ -90,8 +153,8 @@ function goPay() {
         form.action = "stripe.php";
         return true;
     }
-    if (method == "payway") {
-        form.action = "payway.php";
+    if (method == "square") {
+        form.action = "square.php";
         return true;
     }
     if (method == "paypal") {
