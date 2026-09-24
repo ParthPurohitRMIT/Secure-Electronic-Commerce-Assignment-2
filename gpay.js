@@ -113,12 +113,12 @@ function getGoogleTransactionInfo() {
       {
         label: "Subtotal",
         type: "SUBTOTAL",
-        price: "5.00",
+        price: document.getElementById('cart_total').value,
       },
       {
         label: "Tax",
         type: "TAX",
-        price: "5.00",
+        price: document.getElementById('cart_total').value,
       }
     ],
     countryCode: 'AU',
