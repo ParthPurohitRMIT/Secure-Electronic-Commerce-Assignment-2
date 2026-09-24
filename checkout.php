@@ -113,7 +113,6 @@ foreach ($_SESSION['cart'] as $item) {
                 <div class="payment-option"><label><input type="radio" name="payment_method" value="stripe" checked> Stripe (working)</label></div>
                 <div class="payment-option"><label><input type="radio" name="payment_method" value="square"> Square (sandbox)</label></div>
                 <div class="payment-option"><label><input type="radio" name="payment_method" value="paypal"> PayPal (working)</label></div>
-                <!-- Parth: Google Pay - copy tutorial6-gpay/index.js into gpay.js -->
                 <div class="payment-option"><label><input type="radio" name="payment_method" value="gpay"> Google Pay (todo)</label></div>
 
                 <input type="hidden" id="cart_total" value="<?php echo $total; ?>">
@@ -140,10 +139,10 @@ foreach ($_SESSION['cart'] as $item) {
     </div>
 </div>
 
-<!-- Parth Google Pay: add
+<!-- Calls the GooglePay javascript file to allow for integration of GPay  -->
 <script src="gpay.js"></script>
 <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
--->
+
 <script>
 function goPay() {
     var method = document.querySelector('input[name="payment_method"]:checked').value;
@@ -162,13 +161,10 @@ function goPay() {
         return true;
     }
 
-    // Parth Google Pay: call onGooglePaymentButtonClicked() from tutorial6-gpay
-    // use document.getElementById('cart_total').value as the price (AUD)
     if (method == "gpay") {
-        alert("Google Pay not done yet. See tutorial6-gpay.");
+        onGooglePaymentButtonClicked();
         return false;
     }
-    return false;
 }
 </script>
 </body>
