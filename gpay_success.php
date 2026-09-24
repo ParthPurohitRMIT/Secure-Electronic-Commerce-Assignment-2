@@ -26,4 +26,3 @@ $_SESSION['last_order'] = array(
 header("Location: success.php");
 exit();
 ?>
-
